@@ -1,16 +1,44 @@
 ---
-
+// The date logic is now client-side
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width" />
+	<title>Date Divider</title>
+</head>
+<body>
+	<h1 id="date-display"></h1>
+
+	<script is:inline>
+		const dateDisplay = document.getElementById('date-display');
+		let pinnedDate = sessionStorage.getItem('pinnedDate');
+
+		if (!pinnedDate) {
+			const today = new Date();
+			const options = { year: 'numeric', month: 'long', day: 'numeric' };
+			pinnedDate = today.toLocaleDateString('en-US', options);
+			sessionStorage.setItem('pinnedDate', pinnedDate);
+		}
+
+		dateDisplay.textContent = pinnedDate;
+		document.title = pinnedDate;
+	</script>
+</body>
 </html>
+
+<style>
+	body {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		min-height: 100vh;
+		margin: 0;
+		font-family: sans-serif;
+	}
+	h1 {
+		font-size: 5rem;
+		text-align: center;
+	}
+</style>
