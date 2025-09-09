@@ -60,21 +60,54 @@
 		const colorPicker = document.getElementById('color-picker');
 		const svgPath = document.getElementById('color-picker-svg-path');
 		const svgPath2 = document.getElementById('path2');
+		const configBar = document.getElementById('config-bar');
 
-		// Set initial background color from URL or default
+		// --- Color Contrast Logic ---
+		function getContrastColor(hex) {
+			if (hex.indexOf('#') === 0) {
+				hex = hex.slice(1);
+			}
+			// Convert 3-digit hex to 6-digits.
+			if (hex.length === 3) {
+				hex = hex + hex + hex + hex + hex + hex;
+			}
+			if (hex.length !== 6) {
+				return '#000000'; // Default to black on error
+			}
+			const r = parseInt(hex.slice(0, 2), 16);
+			const g = parseInt(hex.slice(2, 4), 16);
+			const b = parseInt(hex.slice(4, 6), 16);
+			// Using the YIQ formula to determine brightness
+			const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+			return (yiq >= 128) ? '#000000' : '#FFFFFF';
+		}
+
+		function updateColors(color) {
+			const contrastColor = getContrastColor(color);
+			
+			// Set page background and picker value
+			document.body.style.backgroundColor = color;
+			colorPicker.value = color;
+
+			// Set text and config bar background for contrast
+			dateDisplay.style.color = contrastColor;
+			configBar.style.backgroundColor = contrastColor === '#000000'
+				? 'rgba(0, 0, 0, 0.9)'
+				: 'rgba(255, 255, 255, 0.9)';
+
+			// Set the icon to the selected color
+			svgPath.setAttribute('fill', color);
+			svgPath2.setAttribute('fill', color);
+		}
+
+		// Set initial colors on page load
 		const initialColor = urlParams.get('bg_color') || '#FFFFFF';
-		document.body.style.backgroundColor = initialColor;
-		colorPicker.value = initialColor;
-		svgPath.setAttribute('fill', initialColor);
-		svgPath2.setAttribute('fill', initialColor);
-
+		updateColors(initialColor);
 
 		// Listen for color changes
 		colorPicker.addEventListener('input', (event) => {
 			const newColor = event.target.value;
-			document.body.style.backgroundColor = newColor;
-			svgPath.setAttribute('fill', newColor);
-			svgPath2.setAttribute('fill', newColor);
+			updateColors(newColor);
 
 			const newUrl = new URL(window.location);
 			newUrl.searchParams.set('bg_color', newColor);
