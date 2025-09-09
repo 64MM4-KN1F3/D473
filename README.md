@@ -4,6 +4,8 @@ A simple, persistent date divider for your browser tabs.
 
 ## Functionality
 
+![plot](./images/date_split.gif)
+
 This page displays a single, large date. It's designed for people who keep many tabs open and want a visual separator to indicate when they opened a set of tabs.
 
 The date displayed is determined by the `date` parameter in the URL.
