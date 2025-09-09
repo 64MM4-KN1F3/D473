@@ -1,0 +1,1 @@
+[ ]  Investigate - Safari on ios and Macos must have some metadata on each tab (in each tab-group) - would there be some way to access that and leverage that for the date (assuming there is a tab-first opened date in the metadata) It must be there somewhere because there is an option in safari macos to close tabs after a defined time interval.

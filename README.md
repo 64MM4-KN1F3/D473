@@ -1,47 +1,37 @@
-# Astro Starter Kit: Minimal
+# Date Divider
 
-```sh
-npm create astro@latest -- --template minimal
-```
+A simple, persistent date divider for your browser tabs.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+## Functionality
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+This page displays a single, large date. It's designed for people who keep many tabs open and want a visual separator to indicate when they opened a set of tabs.
 
-## 🚀 Project Structure
+The date displayed is determined by the `date` parameter in the URL.
 
-Inside of your Astro project, you'll see the following folders and files:
+-   If you visit the page without a date parameter, it will automatically set the parameter to the current date.
+-   If you open a link that already has a date parameter, it will display that specific date.
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+This allows the date to remain fixed when sharing tabs or re-opening them on different devices.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Usage
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+1.  **Open the page:** Navigate to the deployed URL. The current date will be displayed and "pinned" in the URL.
+2.  **New Divider:** To create a new divider with the current date, simply open the base URL again in a new tab.
+3.  **Sharing:** Share the URL from a tab to preserve its pinned date.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Deployment
 
-## 🧞 Commands
+This project is a static Astro site and can be deployed to any static hosting provider. It is currently configured for deployment to GitHub Pages.
+
+The deployment is handled automatically by the GitHub Action workflow in `.github/workflows/deploy.yml`. To deploy, simply push your changes to the `main` branch.
+
+## Development Commands
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+| Command           | Action                                     |
+| :---------------- | :----------------------------------------- |
+| `npm install`     | Installs dependencies                      |
+| `npm run dev`     | Starts local dev server at `localhost:4321`|
+| `npm run build`   | Build your production site to `./dist/`    |
+| `npm run preview` | Preview your build locally, before deploying |

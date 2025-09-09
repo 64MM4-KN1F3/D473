@@ -13,13 +13,19 @@
 
 	<script is:inline>
 		const dateDisplay = document.getElementById('date-display');
-		let pinnedDate = sessionStorage.getItem('pinnedDate');
+		const urlParams = new URLSearchParams(window.location.search);
+		let pinnedDate = urlParams.get('date');
 
 		if (!pinnedDate) {
 			const today = new Date();
 			const options = { year: 'numeric', month: 'long', day: 'numeric' };
 			pinnedDate = today.toLocaleDateString('en-US', options);
-			sessionStorage.setItem('pinnedDate', pinnedDate);
+			
+			// To keep the URL clean, we use history.pushState to add the date parameter
+			// without reloading the page. We also need to construct the URL carefully.
+			const newUrl = new URL(window.location);
+			newUrl.searchParams.set('date', pinnedDate);
+			window.history.pushState({ path: newUrl.href }, '', newUrl.href);
 		}
 
 		dateDisplay.textContent = pinnedDate;
