@@ -89,15 +89,21 @@
 	}
 	.color-picker-wrapper {
 		position: relative;
-		width: 40px;
+		width: 40px; /* Size of the clickable area */
 		height: 40px;
 		cursor: pointer;
 	}
 	#color-picker-icon {
 		width: 100%;
 		height: 100%;
+		/* Make sure icon is below the invisible input */
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
 	}
 	#color-picker {
+		/* Invisible input layer */
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -106,5 +112,6 @@
 		opacity: 0;
 		border: none;
 		padding: 0;
+		z-index: 2; /* Ensure input is on top */
 	}
 </style>
