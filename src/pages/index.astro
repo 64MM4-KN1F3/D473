@@ -13,13 +13,13 @@
 
 	<script is:inline>
 		const dateDisplay = document.getElementById('date-display');
-		let pinnedDate = localStorage.getItem('pinnedDate');
+		let pinnedDate = sessionStorage.getItem('pinnedDate');
 
 		if (!pinnedDate) {
 			const today = new Date();
 			const options = { year: 'numeric', month: 'long', day: 'numeric' };
 			pinnedDate = today.toLocaleDateString('en-US', options);
-			localStorage.setItem('pinnedDate', pinnedDate);
+			sessionStorage.setItem('pinnedDate', pinnedDate);
 		}
 
 		dateDisplay.textContent = pinnedDate;
